@@ -14,13 +14,38 @@
 **/
 
 var express = require('express');
+var stylus	= require('stylus');
+var nib		= require('nib');
 
 var PORT = 80;
 
+/*
 var app = express();
 app.get('/', function (req, res) {
   res.send('Bienvenido a mi primer Contenedor Docker usando Bluemix DevOps! \n A aprovechar Pipeline Services!');
 });
 
-app.listen(PORT)
+*/
+
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .use(nib());
+}
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(stylus.middleware(
+  { src: __dirname + '/public'
+  , compile: compile
+  }
+));
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function (req, res) {
+  res.render(	'index',
+  			{ title : 'Home' }  
+  );
+});
+
+app.listen(PORT);
 console.log(' Application Running on port' + PORT);
