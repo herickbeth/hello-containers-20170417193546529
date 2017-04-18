@@ -12,8 +12,8 @@
     "validator": "*",
     "jquery":"*",
     "request-json":"*",
-    "jade": "^1.0.4",
-    "stylus": "^0.49.1",
-    "nib": "^1.0.4"
+    "jade": "*",
+    "stylus": "*",
+    "nib": "*"
   }
 }
